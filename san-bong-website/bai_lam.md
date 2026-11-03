@@ -1,0 +1,166 @@
+# bai_lam
+
+# BÀI LÀM – HACKATHON 02
+
+- **Mã đề:** 01
+- **Họ tên: Nguyễn Tiến Dũng**
+- **Lớp: HN-KS26-CNTT3**
+- **Link repository:**
+- **Hệ điều hành (Windows/macOS): Windows**
+
+## 4.2. Thao tác máy tính cơ bản bằng CLI
+
+### Các lệnh đã chạy
+
+```bash
+pwd
+Get-ChildItem -Recurse -Force
+mv .\ghi_chu_ban_giao.txt .\docs\
+mkdir backupmkdir backup
+cp .\data\dat_san_thang_10.xlsx .\backup\
+rm .\temp_002.tmp
+cd .\logs\
+ls
+cd ..
+```
+
+### Kết quả liệt kê toàn bộ dự án (Windows: Get-ChildItem -Recurse -Force; macOS: ls -aR)
+
+```
+Directory: C:\Users\Admin\OneDrive\Đính kèm\Luyen_Tap\starter-kit\starter-kit\san-bong-website
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         11/3/2026   1:52 PM                data
+d-----         11/3/2026   1:51 PM                docs
+d-----         11/3/2026   1:51 PM                evidence
+d-----         11/3/2026   1:53 PM                logs
+d-----         11/3/2026   1:47 PM                web
+-a----         11/3/2026   1:47 PM             76 .env
+-a----         11/3/2026   1:47 PM           2409 bai_lam.md
+-a----         11/3/2026   1:47 PM            154 ghi_chu_ban_giao.txt
+-a----         11/3/2026   1:47 PM             22 temp_002.tmp
+
+    Directory: C:\Users\Admin\OneDrive\Đính kèm\Luyen_Tap\starter-kit\starter-kit\san-bong-website\data
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         11/3/2026   1:47 PM           6074 dat_san_thang_10.xlsx
+
+    Directory: C:\Users\Admin\OneDrive\Đính kèm\Luyen_Tap\starter-kit\starter-kit\san-bong-website\logs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         11/3/2026   1:47 PM            956 access.log
+
+    Directory: C:\Users\Admin\OneDrive\Đính kèm\Luyen_Tap\starter-kit\starter-kit\san-bong-website\web
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         11/3/2026   1:47 PM                images
+-a----         11/3/2026   1:47 PM            590 app.js
+-a----         11/3/2026   1:47 PM            529 index.html
+-a----         11/3/2026   1:47 PM            460 style.css
+
+    Directory: C:\Users\Admin\OneDrive\Đính kèm\Luyen_Tap\starter-kit\starter-kit\san-bong-website\web\images
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         11/3/2026   1:47 PM           3101 logo-san-bong.png
+```
+
+## 4.3. Lọc log truy cập website
+
+### a) Lệnh lọc các dòng status=500
+
+```bash
+Get-Content .\logs\access.log | Select-String "status=500" > .\logs\loi_500.txt
+```
+
+### 2 dòng đầu tiên trong logs/loi_500.txt
+
+```
+2026-10-28 08:24:34 POST /api/thanh-toan status=500
+2026-10-28 08:28:45 POST /api/thanh-toan status=500
+```
+
+### b) Lệnh đếm số dòng status=404 và kết quả
+
+```bash
+(Get-Content .\logs\access.log | Select-String "status=404").count
+```
+
+```
+4
+```
+
+## 4.4. Chạy script tong_hop (.ps1 hoặc .sh)
+
+### Lệnh chạy (Windows: nếu dùng Phụ lục 2 thì ghi cả 2 lệnh)
+
+```bash
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\tong_hop.ps1
+```
+
+### Nội dung file logs/tong_hop.txt
+
+```
+# Script: tong_hop.ps1
+# Tac gia: Nguyen Tien Dung
+# Ngay tao: 03/11/2026
+Write-Host "Dang tao bao cao..."
+"=== BAO CAO SU CO WEBSITE ===" > logs\tong_hop.txt
+Get-Content logs\access.log | Select-String "status=404" >> logs\tong_hop.txt
+Get-Content logs\access.log | Select-String "status=500" | Measure-Object >> logs\access.log
+Write-Host "Hoan thanh!"
+```
+
+## 4.5. README.md và bảo vệ thông tin bí mật
+
+> README.md, .gitignore và .env.example được chấm trực tiếp trên file ở gốc dự án. Đánh dấu `[x]` vào các mục đã làm để tự kiểm tra.
+> 
+- [x]  README.md: Heading 1, mô tả có **in đậm** và *in nghiêng*, bảng, code block, task list, blockquote
+- [x]  .gitignore có dòng `.env` (tên file đúng, không có đuôi .txt)
+- [x]  .env.example có đủ tên biến, giá trị để trống (tên file đúng, không có đuôi .txt)
+
+## 4.6. Kiểm tra trang web bằng DevTools (F12) và báo cáo lỗi
+
+### Bảng lỗi
+
+| STT | Tab DevTools phát hiện lỗi | Tên file hoặc thông báo lỗi | Cách khắc phục |
+| --- | --- | --- | --- |
+| 1 | Network | file:///C:/Users/Admin/OneDrive/%C4%90i%CC%81nh%20ke%CC%80m/Luyen_Tap/starter-kit/starter-kit/san-bong-website/web/images/logo.png | <!-- Change this -->
+<img src="C:/Users/Admin/.../web/images/logo.png">
+
+<!-- To this -->
+<img src="images/logo.png"> |
+| 2 | Console | GET file:///C:/Users/Admin/OneDrive/%C4%90i%CC%81nh%20ke%CC%80m/Luyen_Tap/starter-kit/starter-kit/san-bong-website/web/images/logo.png net::ERR_FILE_NOT_FOUND
+app.js:18 Uncaught ReferenceError: hienThiBangGia is not defined | // Define the function before calling it
+function hienThiBangGia() {
+console.log("Displaying price list...");
+// Your logic here
+}
+
+hienThiBangGia(); // Now this will work |
+
+> Ảnh chụp màn hình lưu trong thư mục `evidence/` (network.png, console.png).
+> 
+
+### Báo cáo lỗi gửi trưởng nhóm
+
+- **Context:**
+- **Expected:**
+- **Actual:**
+- **Log:**
+
+### Câu tìm kiếm Google
+
+```
+(Ghi câu tìm kiếm vào đây – xoá dòng này)
+```
+
+## 4.7. Excel
+
+> Phần Excel được chấm trực tiếp trên file `data/dat_san_thang_10.xlsx`, không cần ghi vào đây.
+>
