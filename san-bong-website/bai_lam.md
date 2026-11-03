@@ -130,19 +130,8 @@ Write-Host "Hoan thanh!"
 
 | STT | Tab DevTools phát hiện lỗi | Tên file hoặc thông báo lỗi | Cách khắc phục |
 | --- | --- | --- | --- |
-| 1 | Network | file:///C:/Users/Admin/OneDrive/%C4%90i%CC%81nh%20ke%CC%80m/Luyen_Tap/starter-kit/starter-kit/san-bong-website/web/images/logo.png | <!-- Change this -->
-<img src="C:/Users/Admin/.../web/images/logo.png">
-
-<!-- To this -->
-<img src="images/logo.png"> |
-| 2 | Console | GET file:///C:/Users/Admin/OneDrive/%C4%90i%CC%81nh%20ke%CC%80m/Luyen_Tap/starter-kit/starter-kit/san-bong-website/web/images/logo.png net::ERR_FILE_NOT_FOUND
-app.js:18 Uncaught ReferenceError: hienThiBangGia is not defined | // Define the function before calling it
-function hienThiBangGia() {
-console.log("Displaying price list...");
-// Your logic here
-}
-
-hienThiBangGia(); // Now this will work |
+| 1 | Network | logo khong hien thi | thay ten logo |
+| 2 | Console | sai ten bang | them chu "San" vao bang ten |
 
 > Ảnh chụp màn hình lưu trong thư mục `evidence/` (network.png, console.png).
 > 
